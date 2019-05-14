@@ -1,0 +1,9 @@
+New branch
+clone the git repository
+check out the code
+1.Take Git Pull
+2. Git status
+3. Git add 
+4. Git Commit
+5. Git Push
+6. git checkout -b users/v-faabd/JunitMockitogit 
