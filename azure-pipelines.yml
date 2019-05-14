@@ -3,17 +3,18 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
 
+trigger:
+- master
 pool:
   vmImage: 'ubuntu-latest'
-
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- bash: |
+    export CURRENT=`git rev-parse HEAD`
+    git config credential.$gitUrl.helper '!getPassword() { echo password=$accessToken; echo username=$username; }; getPassword'
+    git push $gitUrl $CURRENT:refs/heads/master
+  displayName: 'Push to Cloud Manager Git'
+  env:
+    gitUrl: $(https://github.com/Faizankhanabdul/devops-pipelines-poc.git)
+    accessToken: $(b68ed1ecbec882e7a6d77787ccbaeb2e78899f50)
+    username: $(Faizankhanabdul)
